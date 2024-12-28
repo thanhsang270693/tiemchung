@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Danh Sách Đăng Ký Tiêm Chủng</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Thanh điều hướng -->
+  <header>
+    <nav>
+      <ul>
+        <li><a href="#">Trang Chủ</a></li>
+        <li><a href="#">Giới Thiệu</a></li>
+        <li><a href="#">Đăng Ký Tiêm Chủng</a></li>
+        <li><a href="#">Liên Hệ</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Tiêu đề danh sách -->
+  <section class="intro">
+    <h1>Danh Sách Đăng Ký Tiêm Chủng</h1>
+  </section>
+
+  <!-- Danh sách đăng ký -->
+  <section class="list-container">
+    <table>
+      <thead>
+        <tr>
+          <th>Họ và tên trẻ</th>
+          <th>Ngày sinh</th>
+          <th>Giới tính</th>
+          <th>Vắc xin</th>
+          <th>Ngày giờ tiêm</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Nguyễn Văn A</td>
+          <td>2019-10-01</td>
+          <td>Nam</td>
+          <td>DPT</td>
+          <td>2024-01-15 10:00</td>
+        </tr>
+        <tr>
+          <td>Trần Thị B</td>
+          <td>2020-05-10</td>
+          <td>Nữ</td>
+          <td>MMR</td>
+          <td>2024-01-16 09:00</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <footer>
+    <p>Trạm Y Tế Thị Trấn Kiên Lương - Địa chỉ: TT. Kiên Lương, H. Kiên Lương, Kiên Giang</p>
+      </footer>
+
+</body>
+</html>
