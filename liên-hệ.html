@@ -170,7 +170,7 @@
     <header>
         <div class="container">
             <h1>Trạm Y Tế Thị Trấn Kiên Lương</h1>
-            <p>Thông tin liên hệ và dịch vụ Y tế</p>
+            <p>Thông tin liên hệ và dịch vụ y tế</p>
         </div>
     </header>
 
@@ -178,9 +178,9 @@
     <section class="contact-info">
         <div class="container">
             <h2>Thông Tin Liên Hệ</h2>
-            <p><strong>Địa chỉ:</strong> Thị Trấn Kiên Lương, H. Kiên Lương, Tỉnh Kiên Giang</p>
+            <p><strong>Địa chỉ:</strong> Thị Trấn Kiên Lương, H. Kiên Lương Tỉnh Kiên Giang</p>
             <p><strong>Email:</strong> <a href="mailto:tramytethitrankienluong@gmail.com">tramytethitrankienluong@gmail.com</a></p>
-          
+            
             <h3>Thông Tin Dịch Vụ</h3>
             <ul>
                 <li>Khám chữa bệnh cơ bản</li>
@@ -203,7 +203,7 @@
         </div>
     </section>
 
-    <!-- Footer Section -->
+       <!-- Footer Section -->
     <footer>
         <div class="container">
             <p>&copy; 2024 Trạm Y Tế Thị Trấn Kiên Lương. Tất cả các quyền được bảo lưu.</p>
@@ -220,31 +220,43 @@
     </div>
 
     <script>
-        // Password validation
+        // Mật khẩu đúng
         const correctPassword = 'Sang1234@';  // Đặt mật khẩu ở đây
 
-        function showPasswordPrompt() {
+        // Khi người dùng nhấn nút "Tải ảnh lên" hoặc "Xóa ảnh", sẽ yêu cầu mật khẩu
+        document.getElementById('uploadBtn').addEventListener('click', function() {
+            showPasswordPrompt('upload');
+        });
+
+        document.getElementById('deleteBtn').addEventListener('click', function() {
+            showPasswordPrompt('delete');
+        });
+
+        // Hiển thị hộp thoại nhập mật khẩu
+        function showPasswordPrompt(action) {
             document.getElementById('passwordPrompt').style.display = 'flex';
+            document.getElementById('passwordPrompt').setAttribute('data-action', action);
         }
 
+        // Xác thực mật khẩu
         function validatePassword() {
             const password = document.getElementById('passwordInput').value;
+            const action = document.getElementById('passwordPrompt').getAttribute('data-action');
+
             if (password === correctPassword) {
                 document.getElementById('passwordPrompt').style.display = 'none';
-                enableImageUpload();
+                if (action === 'upload') {
+                    enableImageUpload();
+                } else if (action === 'delete') {
+                    enableImageDelete();
+                }
             } else {
                 alert('Mật khẩu không chính xác.');
             }
         }
 
-        // Image Upload functionality
+        // Kích hoạt chức năng tải ảnh lên
         function enableImageUpload() {
-            document.getElementById('uploadBtn').style.display = 'inline-block';
-            document.getElementById('deleteBtn').style.display = 'inline-block';
-        }
-
-        // Handle file upload
-        document.getElementById('uploadBtn').addEventListener('click', function() {
             const input = document.createElement('input');
             input.type = 'file';
             input.accept = 'image/*';
@@ -252,14 +264,13 @@
                 previewImage(event);
             };
             input.click();
-        });
+        }
 
-        // Preview uploaded image
+        // Xem trước ảnh đã tải lên
         function previewImage(event) {
             const file = event.target.files[0];
             if (file) {
                 const reader = new FileReader();
-                
                 reader.onload = function(e) {
                     const img = document.createElement('img');
                     img.src = e.target.result;
@@ -267,19 +278,32 @@
                     const imagePreview = document.getElementById('imagePreview');
                     imagePreview.innerHTML = '';  // Xóa ảnh cũ trước khi hiển thị ảnh mới
                     imagePreview.appendChild(img);
+                    // Lưu ảnh vào localStorage
+                    localStorage.setItem('uploadedImage', e.target.result);
                 };
-                
                 reader.readAsDataURL(file);
+                document.getElementById('deleteBtn').style.display = 'inline-block';
             }
         }
 
-        // Delete uploaded image
-        document.getElementById('deleteBtn').addEventListener('click', function() {
+        // Xóa ảnh
+        function enableImageDelete() {
             document.getElementById('imagePreview').innerHTML = '';  // Xóa ảnh
-        });
+            document.getElementById('deleteBtn').style.display = 'none';
+            localStorage.removeItem('uploadedImage');  // Xóa ảnh khỏi localStorage
+        }
 
-        // Trigger password prompt when the page loads
-        window.onload = showPasswordPrompt;
+        // Hiển thị ảnh đã lưu từ localStorage nếu có
+        window.onload = function() {
+            const savedImage = localStorage.getItem('uploadedImage');
+            if (savedImage) {
+                const img = document.createElement('img');
+                img.src = savedImage;
+                img.alt = 'Ảnh tải lên';
+                document.getElementById('imagePreview').appendChild(img);
+                document.getElementById('deleteBtn').style.display = 'inline-block';
+            }
+        }
     </script>
 </body>
 </html>
