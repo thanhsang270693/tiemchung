@@ -3,8 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Đăng ký Tiêm Chủng</title>
+    <title>Đăng ký Tiêm Chủng Lịch Vạn Niên</title>
     <link rel="stylesheet" href="styles.css">
+    <!-- Thêm thư viện cho lịch vạn niên (Lịch Âm Dương) -->
+    <script src="https://cdn.jsdelivr.net/npm/vietnamese-lunar-calendar@0.0.3/dist/lunar-calendar.min.js"></script>
 </head>
 <body>
     <div class="container">
@@ -28,8 +30,13 @@
             </div>
 
             <div class="form-group">
-                <label for="appointmentDate">Ngày giờ tiêm</label>
+                <label for="appointmentDate">Ngày giờ tiêm (Lịch Dương)</label>
                 <input type="datetime-local" id="appointmentDate" required>
+            </div>
+
+            <div class="form-group">
+                <label for="lunarDate">Ngày giờ tiêm (Lịch Âm)</label>
+                <input type="text" id="lunarDate" placeholder="Lịch Âm sẽ hiển thị ở đây" readonly>
             </div>
 
             <div class="form-group">
@@ -58,6 +65,11 @@
                 <input type="number" id="height" placeholder="Nhập chiều cao" required>
             </div>
 
+            <div class="form-group">
+                <label for="address">Địa chỉ</label>
+                <input type="text" id="address" placeholder="Nhập địa chỉ" required>
+            </div>
+
             <button type="submit">Đăng ký</button>
         </form>
 
@@ -69,11 +81,13 @@
                     <th>Họ và tên</th>
                     <th>Ngày sinh</th>
                     <th>Số điện thoại</th>
-                    <th>Ngày giờ tiêm</th>
+                    <th>Ngày giờ tiêm (Lịch Dương)</th>
+                    <th>Ngày giờ tiêm (Lịch Âm)</th>
                     <th>Vắc xin</th>
                     <th>Họ tên ba mẹ</th>
                     <th>Cân nặng</th>
                     <th>Chiều cao</th>
+                    <th>Địa chỉ</th>
                 </tr>
             </thead>
             <tbody>
