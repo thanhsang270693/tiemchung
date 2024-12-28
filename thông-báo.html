@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thông Báo Tiêm Chủng</title>
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: #f4f7fa;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: #4caf50;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    .container {
+      width: 80%;
+      margin: 30px auto;
+      padding: 20px;
+      background-color: #fff;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+    }
+    h2 {
+      color: #4caf50;
+      text-align: center;
+    }
+    .upload-section {
+      margin-bottom: 20px;
+    }
+    input[type="file"] {
+      font-size: 16px;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    .uploaded-image {
+      display: block;
+      margin: 20px auto;
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+    }
+    .message {
+      background-color: #e8f5e9;
+      padding: 15px;
+      border-radius: 5px;
+      margin-top: 20px;
+      font-size: 18px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <h1>Thông Báo Tiêm Chủng</h1>
+  </header>
+
+  <!-- Main content container -->
+  <div class="container">
+    <h2>Thông Báo Tiêm Chủng</h2>
+
+    <!-- Ô tải hình ảnh -->
+    <div class="upload-section">
+      <label for="file-upload">Tải hình ảnh vào thông báo:</label>
+      <input type="file" id="file-upload" accept="image/*" onchange="previewImage(event)">
+    </div>
+
+    <!-- Hiển thị hình ảnh đã tải lên -->
+    <img id="uploaded-image" class="uploaded-image" src="" alt="Hình ảnh tiêm chủng" style="display: none;">
+  
+  <!-- Script để xem trước hình ảnh đã tải lên -->
+  <script>
+    function previewImage(event) {
+      const file = event.target.files[0];
+      const reader = new FileReader();
+      
+      reader.onload = function() {
+        const imgElement = document.getElementById('uploaded-image');
+        imgElement.src = reader.result;
+        imgElement.style.display = 'block';
+      }
+
+      if (file) {
+        reader.readAsDataURL(file);
+      }
+    }
+  </script>
+
+</body>
+</html>
