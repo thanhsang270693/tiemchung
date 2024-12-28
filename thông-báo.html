@@ -46,7 +46,7 @@
             margin: 20px auto;
         }
 
-        input[type="file"] {
+        input[type="file"], input[type="password"] {
             padding: 10px;
             font-size: 1em;
             border: 1px solid #ccc;
@@ -97,7 +97,16 @@
     <main>
         <section id="upload-section">
             <h2>Tải Hình Ảnh Lên</h2>
-            <form id="upload-form">
+
+            <!-- Form mật khẩu -->
+            <form id="password-form">
+                <label for="password">Nhập Mật Khẩu:</label>
+                <input type="password" id="password" placeholder="Nhập mật khẩu" required>
+                <button type="submit">Xác Nhận Mật Khẩu</button>
+            </form>
+
+            <!-- Form tải hình ảnh -->
+            <form id="upload-form" style="display:none;">
                 <input type="file" id="image-upload" accept="image/*" required>
                 <button type="submit">Tải Lên</button>
             </form>
@@ -110,6 +119,9 @@
                 <p>Hình ảnh sẽ hiển thị ở đây:</p>
                 <img id="preview-image" src="" alt="Hình ảnh đã tải" style="display:none; width: 100%; max-width: 500px;">
             </div>
+
+            <!-- Xóa hình ảnh -->
+            <button id="delete-btn" style="display:none;">Xóa Hình Ảnh</button>
         </section>
     </main>
 
@@ -123,6 +135,12 @@
             const imageInput = document.getElementById("image-upload");
             const notificationDiv = document.getElementById("notification");
             const previewImage = document.getElementById("preview-image");
+            const passwordForm = document.getElementById("password-form");
+            const deleteBtn = document.getElementById("delete-btn");
+            const passwordInput = document.getElementById("password");
+
+            // Mật khẩu cố định
+            const correctPassword = "Sang1234@";  // Thay đổi mật khẩu ở đây
 
             // Kiểm tra xem có hình ảnh đã lưu trong localStorage không
             const savedImage = localStorage.getItem("image");
@@ -132,7 +150,25 @@
                 previewImage.style.display = "block";
                 notificationDiv.innerHTML = "Hình ảnh đã được lưu từ lần trước.";
                 notificationDiv.style.color = "blue";
+                deleteBtn.style.display = "inline-block"; // Hiển thị nút xóa
             }
+
+            // Kiểm tra mật khẩu và hiển thị form tải hình ảnh
+            passwordForm.addEventListener("submit", function(event) {
+                event.preventDefault();  // Ngăn việc gửi form
+
+                const password = passwordInput.value;
+                if (password === correctPassword) {
+                    // Nếu mật khẩu đúng, hiển thị form tải ảnh
+                    passwordForm.style.display = "none";
+                    uploadForm.style.display = "block";
+                    notificationDiv.innerHTML = "Bạn có thể tải ảnh lên!";
+                    notificationDiv.style.color = "green";
+                } else {
+                    notificationDiv.innerHTML = "Mật khẩu không đúng!";
+                    notificationDiv.style.color = "red";
+                }
+            });
 
             // Xử lý khi người dùng tải lên hình ảnh
             uploadForm.addEventListener("submit", function(event) {
@@ -155,6 +191,7 @@
                         // Hiển thị thông báo thành công
                         notificationDiv.innerHTML = "Hình ảnh đã được tải lên và lưu!";
                         notificationDiv.style.color = "green";  // Thông báo thành công
+                        deleteBtn.style.display = "inline-block";  // Hiển thị nút xóa
                     }
 
                     reader.readAsDataURL(file);  // Đọc file dưới dạng base64
@@ -162,6 +199,16 @@
                     notificationDiv.innerHTML = "Vui lòng chọn một hình ảnh!";
                     notificationDiv.style.color = "red";  // Thông báo lỗi
                 }
+            });
+
+            // Xử lý khi người dùng xóa hình ảnh
+            deleteBtn.addEventListener("click", function() {
+                // Xóa hình ảnh từ localStorage và ẩn hình ảnh
+                localStorage.removeItem("image");
+                previewImage.style.display = "none";
+                deleteBtn.style.display = "none"; // Ẩn nút xóa
+                notificationDiv.innerHTML = "Hình ảnh đã được xóa!";
+                notificationDiv.style.color = "orange";  // Thông báo xóa thành công
             });
         });
     </script>
