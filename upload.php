@@ -16,15 +16,15 @@ if (isset($_FILES['file-upload'])) {
         $errors[] = "Chỉ chấp nhận các định dạng tệp .jpg, .jpeg, .png, .gif.";
     }
 
-    // Kiểm tra kích thước tệp (giới hạn 2MB)
+    // Kiểm tra kích thước tệp (giới hạn 200MB)
     if ($file_size > 2097152) {
-        $errors[] = "Kích thước tệp quá lớn. Vui lòng tải lên tệp dưới 2MB.";
+        $errors[] = "Kích thước tệp quá lớn. Vui lòng tải lên tệp dưới 200MB.";
     }
 
     // Nếu không có lỗi, tiến hành lưu ảnh
     if (empty($errors)) {
-        // Tạo thư mục 'uploads' nếu chưa có
-        $upload_dir = 'uploads/';
+        // Tạo thư mục 'upload' nếu chưa có
+        $upload_dir = 'upload/';
         if (!is_dir($upload_dir)) {
             mkdir($upload_dir, 0777, true);
         }
