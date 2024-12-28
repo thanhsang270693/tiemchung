@@ -16,10 +16,11 @@ document.addEventListener("DOMContentLoaded", function() {
         const parentName = document.getElementById("parentName").value;
         const weight = document.getElementById("weight").value;
         const height = document.getElementById("height").value;
+        const address = document.getElementById("address").value;
 
         // Kiểm tra nếu các trường không rỗng
-        if (name && dob && phone && appointmentDate && vaccine && parentName && weight && height) {
-            // Định dạng ngày giờ tiêm theo dạng dễ đọc
+        if (name && dob && phone && appointmentDate && vaccine && parentName && weight && height && address) {
+            // Lấy ngày giờ từ input Lịch Dương
             const formattedDate = new Date(appointmentDate);
             const formattedAppointmentDate = formattedDate.toLocaleString("vi-VN", {
                 weekday: 'long', 
@@ -30,6 +31,10 @@ document.addEventListener("DOMContentLoaded", function() {
                 minute: 'numeric',
                 second: 'numeric'
             });
+
+            // Chuyển ngày giờ Lịch Dương sang Lịch Âm
+            const lunarDate = new LunarCalendar(formattedDate);
+            const lunarFormattedDate = lunarDate.getLunarDateString();
 
             // Tạo một hàng mới cho bảng danh sách đăng ký
             const row = document.createElement("tr");
@@ -43,13 +48,17 @@ document.addEventListener("DOMContentLoaded", function() {
             const cell4 = document.createElement("td");
             cell4.textContent = formattedAppointmentDate;
             const cell5 = document.createElement("td");
-            cell5.textContent = vaccine;
+            cell5.textContent = lunarFormattedDate;  // Lịch Âm
             const cell6 = document.createElement("td");
-            cell6.textContent = parentName;
+            cell6.textContent = vaccine;
             const cell7 = document.createElement("td");
-            cell7.textContent = weight;
+            cell7.textContent = parentName;
             const cell8 = document.createElement("td");
-            cell8.textContent = height;
+            cell8.textContent = weight;
+            const cell9 = document.createElement("td");
+            cell9.textContent = height;
+            const cell10 = document.createElement("td");
+            cell10.textContent = address;
 
             // Thêm các ô vào hàng
             row.appendChild(cell1);
@@ -60,6 +69,8 @@ document.addEventListener("DOMContentLoaded", function() {
             row.appendChild(cell6);
             row.appendChild(cell7);
             row.appendChild(cell8);
+            row.appendChild(cell9);
+            row.appendChild(cell10);
 
             // Thêm hàng vào bảng đăng ký
             registrationList.appendChild(row);
