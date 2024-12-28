@@ -32,12 +32,24 @@
     .upload-section {
       margin-bottom: 20px;
     }
-    input[type="file"] {
+    input[type="file"], input[type="password"] {
       font-size: 16px;
       padding: 10px;
       margin: 10px 0;
       border: 1px solid #ccc;
       border-radius: 5px;
+    }
+    button {
+      background-color: #4caf50;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    button:hover {
+      background-color: #45a049;
     }
     .uploaded-image {
       display: block;
@@ -54,6 +66,11 @@
       font-size: 18px;
       text-align: center;
     }
+    .actions {
+      display: none;
+      margin-top: 20px;
+      text-align: center;
+    }
   </style>
 </head>
 <body>
@@ -67,17 +84,53 @@
   <div class="container">
     <h2>Thông Báo Tiêm Chủng</h2>
 
-    <!-- Ô tải hình ảnh -->
-    <div class="upload-section">
-      <label for="file-upload">Tải hình ảnh vào thông báo:</label>
-      <input type="file" id="file-upload" accept="image/*" onchange="previewImage(event)">
+    <!-- Mật khẩu bảo vệ -->
+    <div>
+      <label for="password">Nhập mật khẩu để tải ảnh lên hoặc xóa ảnh:</label>
+      <input type="password" id="password" placeholder="Nhập mật khẩu" />
+      <button onclick="verifyPassword()">Xác nhận</button>
     </div>
 
-    <!-- Hiển thị hình ảnh đã tải lên -->
-    <img id="uploaded-image" class="uploaded-image" src="" alt="Hình ảnh tiêm chủng" style="display: none;">
-  
-  <!-- Script để xem trước hình ảnh đã tải lên -->
+    <!-- Phần Upload và Xóa Ảnh -->
+    <div class="actions" id="actions">
+      <!-- Ô tải hình ảnh -->
+      <div class="upload-section">
+        <label for="file-upload">Tải hình ảnh vào thông báo:</label>
+        <input type="file" id="file-upload" accept="image/*" onchange="previewImage(event)">
+      </div>
+
+      <!-- Hiển thị hình ảnh đã tải lên -->
+      <img id="uploaded-image" class="uploaded-image" src="" alt="Hình ảnh tiêm chủng" style="display: none;">
+
+      <!-- Nút xóa ảnh -->
+      <button onclick="deleteImage()">Xóa ảnh</button>
+    </div>
+
+    <!-- Thông báo lịch tiêm -->
+    <div class="message">
+      <strong>Ngày tiêm chủng: 15 tháng 1, 2024</strong><br>
+      <strong>Vắc xin:</strong> Vắc xin phòng bệnh sởi - rubella (MR)<br>
+      <strong>Địa điểm:</strong> Trạm Y tế Thị Trấn Kiên Lương
+    </div>
+  </div>
+
+  <!-- Script để kiểm tra mật khẩu, xem trước hình ảnh và xóa hình ảnh -->
   <script>
+    const correctPassword = 'Sang1234@'; // Mật khẩu đúng để tải và xóa ảnh
+
+    // Kiểm tra mật khẩu người dùng nhập vào
+    function verifyPassword() {
+      const userPassword = document.getElementById('password').value;
+
+      if (userPassword === correctPassword) {
+        document.getElementById('actions').style.display = 'block'; // Hiển thị các hành động upload và xóa
+        alert('Mật khẩu đúng! Bạn có thể tải ảnh lên hoặc xóa ảnh.');
+      } else {
+        alert('Mật khẩu sai! Vui lòng thử lại.');
+      }
+    }
+
+    // Xem trước hình ảnh đã tải lên
     function previewImage(event) {
       const file = event.target.files[0];
       const reader = new FileReader();
@@ -91,6 +144,14 @@
       if (file) {
         reader.readAsDataURL(file);
       }
+    }
+
+    // Xóa hình ảnh đã tải lên
+    function deleteImage() {
+      const imgElement = document.getElementById('uploaded-image');
+      imgElement.src = '';
+      imgElement.style.display = 'none';
+      document.getElementById('file-upload').value = ''; // Xóa tệp đã chọn
     }
   </script>
 
