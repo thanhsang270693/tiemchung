@@ -74,33 +74,45 @@ button:hover {
     background-color: #45a049;
 }
 
-/* Bảng lịch tiêm chủng */
-#calendarTable {
+/* Bảng danh sách đăng ký */
+table {
     width: 100%;
     margin-top: 30px;
     border-collapse: collapse;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-#calendarTable th,
-#calendarTable td {
+th,
+td {
     padding: 12px;
     text-align: left;
     border: 1px solid #ddd;
 }
 
-#calendarTable th {
+th {
     background-color: #f2f2f2;
     color: #333;
 }
 
-#calendarTable tbody tr:hover {
+td {
+    background-color: #fafafa;
+}
+
+tbody tr:hover {
     background-color: #f1f1f1;
     cursor: pointer;
 }
 
-#calendarTable td {
-    background-color: #fafafa;
+/* Lịch tiêm chủng */
+#calendar {
+    margin-top: 30px;
+}
+
+#calendar div {
+    padding: 10px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    margin-bottom: 10px;
 }
 
 /* Responsive design */
