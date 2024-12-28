@@ -1,61 +1,127 @@
-// Lấy phần tử của form và bảng
-const form = document.getElementById("registrationForm");
-const registrationList = document.getElementById("registrationList").getElementsByTagName("tbody")[0];
+/* Cấu hình chung cho toàn bộ trang */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
-// Lắng nghe sự kiện submit của form
-form.addEventListener("submit", function(event) {
-    // Ngừng hành động mặc định (gửi form)
-    event.preventDefault();
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f9fafb;
+    color: #333;
+    line-height: 1.6;
+}
 
-    // Lấy giá trị từ các trường trong form
-    const name = document.getElementById("name").value;
-    const dob = document.getElementById("dob").value;
-    const phone = document.getElementById("phone").value;
-    const appointmentDate = document.getElementById("appointmentDate").value;
-    const vaccine = document.getElementById("vaccine").value;
-    const parentName = document.getElementById("parentName").value; // Lấy họ tên ba mẹ
-    const weight = document.getElementById("weight").value; // Lấy cân nặng
-    const height = document.getElementById("height").value; // Lấy chiều cao
+.container {
+    width: 80%;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
 
-    // Kiểm tra nếu các trường không rỗng
-    if (name && dob && phone && appointmentDate && vaccine && parentName && weight && height) {
-        // Tạo một hàng mới cho bảng
-        const row = document.createElement("tr");
+/* Tiêu đề chính */
+h1 {
+    text-align: center;
+    color: #4CAF50;
+    margin-bottom: 30px;
+    font-size: 2em;
+}
 
-        // Tạo các ô dữ liệu cho hàng
-        const cell1 = document.createElement("td");
-        cell1.textContent = name;
-        const cell2 = document.createElement("td");
-        cell2.textContent = dob;
-        const cell3 = document.createElement("td");
-        cell3.textContent = phone;
-        const cell4 = document.createElement("td");
-        cell4.textContent = appointmentDate;
-        const cell5 = document.createElement("td");
-        cell5.textContent = vaccine;
-        const cell6 = document.createElement("td");
-        cell6.textContent = parentName; // Hiển thị họ tên ba mẹ
-        const cell7 = document.createElement("td");
-        cell7.textContent = weight; // Hiển thị cân nặng
-        const cell8 = document.createElement("td");
-        cell8.textContent = height; // Hiển thị chiều cao
+/* Form đăng ký */
+form {
+    display: flex;
+    flex-direction: column;
+}
 
-        // Thêm các ô vào hàng
-        row.appendChild(cell1);
-        row.appendChild(cell2);
-        row.appendChild(cell3);
-        row.appendChild(cell4);
-        row.appendChild(cell5);
-        row.appendChild(cell6);
-        row.appendChild(cell7);
-        row.appendChild(cell8);
+.form-group {
+    margin-bottom: 20px;
+}
 
-        // Thêm hàng vào bảng
-        registrationList.appendChild(row);
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: #555;
+}
 
-        // Reset form sau khi gửi
-        form.reset();
-    } else {
-        alert("Vui lòng điền đầy đủ thông tin!");
+input,
+select,
+button {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    font-size: 1em;
+}
+
+input:focus,
+select:focus {
+    border-color: #4CAF50;
+    outline: none;
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+/* Bảng lịch tiêm chủng */
+#calendarTable {
+    width: 100%;
+    margin-top: 30px;
+    border-collapse: collapse;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+#calendarTable th,
+#calendarTable td {
+    padding: 12px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+#calendarTable th {
+    background-color: #f2f2f2;
+    color: #333;
+}
+
+#calendarTable tbody tr:hover {
+    background-color: #f1f1f1;
+    cursor: pointer;
+}
+
+#calendarTable td {
+    background-color: #fafafa;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .container {
+        width: 95%;
     }
-});
+
+    h1 {
+        font-size: 1.6em;
+    }
+
+    form {
+        padding: 10px;
+    }
+
+    button {
+        padding: 15px;
+    }
+
+    table {
+        font-size: 0.9em;
+    }
+}
