@@ -3,51 +3,152 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Thông Báo Tiêm Chủng</title>
     <style>
+        /* Reset các kiểu mặc định */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Kiểu dáng cơ bản */
         body {
             font-family: Arial, sans-serif;
-        }
-        .notification {
-            border: 2px solid #4CAF50;
-            border-radius: 10px;
+            background-color: #f9f9f9;
+            color: #333;
             padding: 20px;
-            background-color: #e9f7e9;
-            margin: 20px;
-            max-width: 600px;
+        }
+
+        header {
+            text-align: center;
+            padding: 20px;
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        h1 {
+            font-size: 2em;
+        }
+
+        h2 {
+            margin-top: 20px;
+            color: #4CAF50;
+        }
+
+        /* Form tải hình ảnh */
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            max-width: 400px;
+            margin: 20px auto;
+        }
+
+        input[type="file"] {
+            padding: 10px;
+            font-size: 1em;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        /* Khu vực thông báo */
+        #notification {
+            margin-top: 10px;
+            text-align: center;
+            color: green;
+        }
+
+        /* Hiển thị hình ảnh */
+        #image-preview {
+            margin-top: 20px;
             text-align: center;
         }
-        .notification img {
-            max-width: 100%;
-            height: auto;
-            margin-top: 10px;
+
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
         }
     </style>
 </head>
 <body>
+    <header>
+        <h1>Thông Báo Tiêm Chủng Trẻ Em</h1>
+        <p>Chọn hình ảnh và tải lên để nhận thông báo tiêm chủng.</p>
+    </header>
 
-<div class="notification">
-    <h2>Thông Báo Tiêm Chủng</h2>
-    <p>Chúng tôi xin thông báo lịch tiêm chủng cho trẻ em tại Trạm Y Tế Thị Trấn Kiên Lương.</p>
+    <main>
+        <section id="upload-section">
+            <h2>Tải Hình Ảnh Lên</h2>
+            <form id="upload-form">
+                <input type="file" id="image-upload" accept="image/*" required>
+                <button type="submit">Tải Lên</button>
+            </form>
 
-    <!-- Form tải ảnh -->
-    <form action="upload.php" method="post" enctype="multipart/form-data">
-        <label for="file-upload">Chọn ảnh thông báo:</label>
-        <input type="file" name="file-upload" id="file-upload" accept="image/*">
-        <br><br>
-        <input type="submit" value="Tải ảnh lên" name="submit">
-    </form>
-    
-    <!-- Hiển thị ảnh tải lên -->
-    <?php
-    if (isset($_GET['image'])) {
-        $image = $_GET['image'];
-        echo "<img src='uploads/$image' alt='Ảnh thông báo' />";
-    }
-    ?>
-    
-    <p>Vui lòng đến đúng thời gian quy định để đảm bảo sức khỏe cho trẻ.</p>
-</div>
+            <!-- Khu vực thông báo -->
+            <div id="notification"></div>
 
+            <!-- Khu vực hiển thị hình ảnh -->
+            <div id="image-preview">
+                <p>Hình ảnh sẽ hiển thị ở đây:</p>
+                <img id="preview-image" src="" alt="Hình ảnh đã tải" style="display:none; width: 100%; max-width: 500px;">
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Thông Báo Tiêm Chủng Trẻ Em. Tất cả quyền lợi được bảo vệ.</p>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const uploadForm = document.getElementById("upload-form");
+            const imageInput = document.getElementById("image-upload");
+            const notificationDiv = document.getElementById("notification");
+            const previewImage = document.getElementById("preview-image");
+
+            // Xử lý khi người dùng tải lên hình ảnh
+            uploadForm.addEventListener("submit", function(event) {
+                event.preventDefault();  // Ngăn việc gửi form
+
+                const file = imageInput.files[0];  // Lấy file người dùng chọn
+                if (file) {
+                    const reader = new FileReader();  // Đọc file hình ảnh
+
+                    // Khi file được đọc thành công, hiển thị thông báo và hình ảnh
+                    reader.onload = function(e) {
+                        previewImage.src = e.target.result;  // Đặt src cho hình ảnh
+                        previewImage.style.display = "block";  // Hiển thị hình ảnh
+
+                        // Hiển thị thông báo thành công
+                        notificationDiv.innerHTML = "Hình ảnh đã được tải lên thành công!";
+                        notificationDiv.style.color = "green";  // Thông báo thành công
+                    }
+
+                    reader.readAsDataURL(file);  // Đọc file dưới dạng base64
+                } else {
+                    notificationDiv.innerHTML = "Vui lòng chọn một hình ảnh!";
+                    notificationDiv.style.color = "red";  // Thông báo lỗi
+                }
+            });
+        });
+    </script>
 </body>
 </html>
