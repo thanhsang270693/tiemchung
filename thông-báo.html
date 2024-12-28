@@ -29,7 +29,23 @@
 <div class="notification">
     <h2>Thông Báo Tiêm Chủng</h2>
     <p>Chúng tôi xin thông báo lịch tiêm chủng cho trẻ em tại Trạm Y Tế Thị Trấn Kiên Lương.</p>
-    <img src="image.jpg" alt="Ảnh thông báo" />
+
+    <!-- Form tải ảnh -->
+    <form action="upload.php" method="post" enctype="multipart/form-data">
+        <label for="file-upload">Chọn ảnh thông báo:</label>
+        <input type="file" name="file-upload" id="file-upload" accept="image/*">
+        <br><br>
+        <input type="submit" value="Tải ảnh lên" name="submit">
+    </form>
+    
+    <!-- Hiển thị ảnh tải lên -->
+    <?php
+    if (isset($_GET['image'])) {
+        $image = $_GET['image'];
+        echo "<img src='uploads/$image' alt='Ảnh thông báo' />";
+    }
+    ?>
+    
     <p>Vui lòng đến đúng thời gian quy định để đảm bảo sức khỏe cho trẻ.</p>
 </div>
 
