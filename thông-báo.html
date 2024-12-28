@@ -121,6 +121,13 @@
 
             <!-- Xóa hình ảnh -->
             <button id="delete-btn" style="display:none;">Xóa Hình Ảnh</button>
+
+            <!-- Form mật khẩu xóa hình ảnh -->
+            <form id="delete-password-form" style="display:none;">
+                <label for="delete-password">Nhập Mật Khẩu Để Xóa Hình Ảnh:</label>
+                <input type="password" id="delete-password" placeholder="Nhập mật khẩu để xóa" required>
+                <button type="submit">Xóa Hình Ảnh</button>
+            </form>
         </section>
     </main>
 
@@ -136,6 +143,8 @@
             const previewImage = document.getElementById("preview-image");
             const passwordForm = document.getElementById("password-form");
             const deleteBtn = document.getElementById("delete-btn");
+            const deletePasswordForm = document.getElementById("delete-password-form");
+            const deletePasswordInput = document.getElementById("delete-password");
             const passwordInput = document.getElementById("password");
 
             // Mật khẩu cố định
@@ -202,12 +211,27 @@
 
             // Xử lý khi người dùng xóa hình ảnh
             deleteBtn.addEventListener("click", function() {
-                // Xóa hình ảnh từ localStorage và ẩn hình ảnh
-                localStorage.removeItem("image");
-                previewImage.style.display = "none";
-                deleteBtn.style.display = "none"; // Ẩn nút xóa
-                notificationDiv.innerHTML = "Hình ảnh đã được xóa!";
-                notificationDiv.style.color = "orange";  // Thông báo xóa thành công
+                // Hiển thị form nhập mật khẩu để xóa
+                deletePasswordForm.style.display = "block";
+            });
+
+            // Kiểm tra mật khẩu và xóa hình ảnh
+            deletePasswordForm.addEventListener("submit", function(event) {
+                event.preventDefault();  // Ngăn việc gửi form
+
+                const deletePassword = deletePasswordInput.value;
+                if (deletePassword === correctPassword) {
+                    // Xóa hình ảnh từ localStorage và ẩn hình ảnh
+                    localStorage.removeItem("image");
+                    previewImage.style.display = "none";
+                    deleteBtn.style.display = "none"; // Ẩn nút xóa
+                    notificationDiv.innerHTML = "Hình ảnh đã được xóa!";
+                    notificationDiv.style.color = "orange";  // Thông báo xóa thành công
+                    deletePasswordForm.style.display = "none";  // Ẩn form mật khẩu
+                } else {
+                    notificationDiv.innerHTML = "Mật khẩu xóa không đúng!";
+                    notificationDiv.style.color = "red";  // Thông báo mật khẩu không đúng
+                }
             });
         });
     </script>
