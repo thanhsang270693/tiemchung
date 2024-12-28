@@ -16,26 +16,25 @@ if (isset($_FILES['file-upload'])) {
         $errors[] = "Chỉ chấp nhận các định dạng tệp .jpg, .jpeg, .png, .gif.";
     }
 
-    // Kiểm tra kích thước tệp (giới hạn 200MB)
+    // Kiểm tra kích thước tệp (giới hạn dưới 2MB)
     if ($file_size > 2097152) {
-        $errors[] = "Kích thước tệp quá lớn. Vui lòng tải lên tệp dưới 200MB.";
+        $errors[] = "Kích thước tệp quá lớn. Vui lòng tải lên tệp dưới 2MB.";
     }
 
     // Nếu không có lỗi, tiến hành lưu ảnh
     if (empty($errors)) {
-        // Tạo thư mục 'upload' nếu chưa có
-        $upload_dir = 'upload/';
+        // Tạo thư mục 'uploads' nếu chưa có
+        $upload_dir = 'uploads/';
         if (!is_dir($upload_dir)) {
-            mkdir($upload_dir, 0777, true);
+            mkdir($upload_dir, 0777, true); // Tạo thư mục nếu chưa tồn tại
         }
 
         // Đặt đường dẫn lưu tệp
-        $file_path = $upload_dir . basename($file_name);
+        $file_path = $upload_dir . time() . "_" . basename($file_name);
 
         // Di chuyển tệp từ thư mục tạm đến thư mục uploads
         if (move_uploaded_file($file_tmp, $file_path)) {
             echo "Tệp đã được tải lên thành công!";
-            // Trả về đường dẫn ảnh đã tải lên
             echo "<br><br><img src='$file_path' alt='Ảnh đã tải lên' style='max-width:100%;'>";
         } else {
             echo "Có lỗi trong quá trình tải lên tệp.";
@@ -46,5 +45,7 @@ if (isset($_FILES['file-upload'])) {
             echo "<p style='color:red;'>$error</p>";
         }
     }
+} else {
+    echo "Chưa có tệp nào được chọn để tải lên.";
 }
 ?>
