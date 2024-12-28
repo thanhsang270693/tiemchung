@@ -1,6 +1,6 @@
 // Lấy phần tử của form và bảng
 const form = document.getElementById("registrationForm");
-const calendarTableBody = document.getElementById("calendarTable").getElementsByTagName("tbody")[0];
+const registrationList = document.getElementById("registrationList").getElementsByTagName("tbody")[0];
 
 // Lắng nghe sự kiện submit của form
 form.addEventListener("submit", function(event) {
@@ -19,35 +19,41 @@ form.addEventListener("submit", function(event) {
 
     // Kiểm tra nếu các trường không rỗng
     if (name && dob && phone && appointmentDate && vaccine && parentName && weight && height) {
-        // Định dạng ngày giờ tiêm cho dễ đọc
-        const formattedDate = new Date(appointmentDate).toLocaleString('vi-VN', {
-            weekday: 'long', 
-            year: 'numeric', 
-            month: 'numeric', 
-            day: 'numeric', 
-            hour: 'numeric', 
-            minute: 'numeric',
-            second: 'numeric'
-        });
+        // Định dạng ngày giờ tiêm theo dạng đẹp hơn
+        const formattedDate = new Date(appointmentDate);
+        const formattedAppointmentDate = dateFns.format(formattedDate, 'eeee, d MMMM yyyy, HH:mm');
 
-        // Tạo một hàng mới cho bảng lịch
+        // Tạo một hàng mới cho bảng danh sách đăng ký
         const row = document.createElement("tr");
 
-        // Tạo các ô dữ liệu cho hàng
         const cell1 = document.createElement("td");
-        cell1.textContent = formattedDate; // Ngày giờ tiêm
+        cell1.textContent = name;
         const cell2 = document.createElement("td");
-        cell2.textContent = vaccine; // Loại vắc xin
+        cell2.textContent = dob;
         const cell3 = document.createElement("td");
-        cell3.textContent = parentName; // Họ tên ba mẹ
+        cell3.textContent = phone;
+        const cell4 = document.createElement("td");
+        cell4.textContent = formattedAppointmentDate;
+        const cell5 = document.createElement("td");
+        cell5.textContent = vaccine;
+        const cell6 = document.createElement("td");
+        cell6.textContent = parentName;
+        const cell7 = document.createElement("td");
+        cell7.textContent = weight;
+        const cell8 = document.createElement("td");
+        cell8.textContent = height;
 
-        // Thêm các ô vào hàng
         row.appendChild(cell1);
         row.appendChild(cell2);
         row.appendChild(cell3);
+        row.appendChild(cell4);
+        row.appendChild(cell5);
+        row.appendChild(cell6);
+        row.appendChild(cell7);
+        row.appendChild(cell8);
 
-        // Thêm hàng vào bảng lịch
-        calendarTableBody.appendChild(row);
+        // Thêm hàng vào bảng đăng ký
+        registrationList.appendChild(row);
 
         // Reset form sau khi gửi
         form.reset();
