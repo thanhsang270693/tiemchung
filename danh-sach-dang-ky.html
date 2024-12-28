@@ -23,10 +23,18 @@
   <!-- Tiêu đề danh sách -->
   <section class="intro">
     <h1>Danh Sách Đăng Ký Tiêm Chủng</h1>
+     <p>Dưới đây là danh sách những người đã đăng ký tiêm chủng. Bạn có thể xóa toàn bộ danh sách đăng ký nếu nhập đúng mật khẩu.</p>
   </section>
 
-  <!-- Danh sách đăng ký -->
-  <section class="list-container">
+  <!-- Nút xóa toàn bộ và trường nhập mật khẩu -->
+  <section class="delete-section">
+    <label for="password">Nhập mật khẩu để xóa toàn bộ danh sách:</label>
+    <input type="password" id="password" placeholder="Nhập mật khẩu" />
+    <button onclick="deleteAllRegistrations()">Xóa Toàn Bộ Danh Sách</button>
+    </section>
+
+   <!-- Bảng danh sách đăng ký -->
+  <section class="registration-list">
     <table>
       <thead>
         <tr>
@@ -48,14 +56,15 @@
     </footer>
 
   <script>
-    // Lấy danh sách đăng ký từ localStorage
-    let registrations = JSON.parse(localStorage.getItem('registrations')) || [];
+    // Mật khẩu mặc định (có thể thay đổi)
+    const correctPassword = "admin123";
 
-    // Lấy phần tử tbody để hiển thị danh sách đăng ký
+    // Lấy danh sách đăng ký từ localStorage và hiển thị
+    const registrations = JSON.parse(localStorage.getItem('registrations')) || [];
     const registrationList = document.getElementById('registration-list');
 
     // Hiển thị danh sách đăng ký
-    registrations.forEach(registration => {
+    registrations.forEach((registration) => {
       const row = document.createElement('tr');
       row.innerHTML = `
         <td>${registration.name}</td>
@@ -66,6 +75,28 @@
       `;
       registrationList.appendChild(row);
     });
+
+    // Hàm xóa toàn bộ danh sách đăng ký
+    function deleteAllRegistrations() {
+      const passwordInput = document.getElementById('password');
+      const enteredPassword = passwordInput.value.trim(); // Lấy mật khẩu nhập vào
+
+      if (enteredPassword === "") {
+        alert("Vui lòng nhập mật khẩu.");
+        return;
+      }
+
+      // Kiểm tra mật khẩu
+      if (enteredPassword === correctPassword) {
+        // Xóa toàn bộ dữ liệu trong localStorage
+        localStorage.removeItem('registrations');
+
+        // Cập nhật lại bảng danh sách đăng ký (làm mới trang)
+        window.location.reload();
+      } else {
+        alert("Mật khẩu không đúng! Vui lòng thử lại.");
+      }
+    }
   </script>
 
 </body>
