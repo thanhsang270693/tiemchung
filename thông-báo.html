@@ -124,6 +124,16 @@
             const notificationDiv = document.getElementById("notification");
             const previewImage = document.getElementById("preview-image");
 
+            // Kiểm tra xem có hình ảnh đã lưu trong localStorage không
+            const savedImage = localStorage.getItem("image");
+            if (savedImage) {
+                // Nếu có, hiển thị hình ảnh đã lưu
+                previewImage.src = savedImage;
+                previewImage.style.display = "block";
+                notificationDiv.innerHTML = "Hình ảnh đã được lưu từ lần trước.";
+                notificationDiv.style.color = "blue";
+            }
+
             // Xử lý khi người dùng tải lên hình ảnh
             uploadForm.addEventListener("submit", function(event) {
                 event.preventDefault();  // Ngăn việc gửi form
@@ -134,11 +144,16 @@
 
                     // Khi file được đọc thành công, hiển thị thông báo và hình ảnh
                     reader.onload = function(e) {
-                        previewImage.src = e.target.result;  // Đặt src cho hình ảnh
+                        const imageData = e.target.result;  // Lấy dữ liệu base64 của hình ảnh
+
+                        // Lưu hình ảnh vào localStorage
+                        localStorage.setItem("image", imageData);
+
+                        previewImage.src = imageData;  // Đặt src cho hình ảnh
                         previewImage.style.display = "block";  // Hiển thị hình ảnh
 
                         // Hiển thị thông báo thành công
-                        notificationDiv.innerHTML = "Hình ảnh đã được tải lên thành công!";
+                        notificationDiv.innerHTML = "Hình ảnh đã được tải lên và lưu!";
                         notificationDiv.style.color = "green";  // Thông báo thành công
                     }
 
