@@ -37,28 +37,36 @@
           <th>Ngày giờ tiêm</th>
         </tr>
       </thead>
-      <tbody>
-        <tr>
-          <td>Nguyễn Văn A</td>
-          <td>2019-10-01</td>
-          <td>Nam</td>
-          <td>DPT</td>
-          <td>2024-01-15 10:00</td>
-        </tr>
-        <tr>
-          <td>Trần Thị B</td>
-          <td>2020-05-10</td>
-          <td>Nữ</td>
-          <td>MMR</td>
-          <td>2024-01-16 09:00</td>
-        </tr>
+      <tbody id="registration-list">
+        <!-- Danh sách đăng ký sẽ được hiển thị tại đây -->
       </tbody>
     </table>
   </section>
 
   <footer>
     <p>Trạm Y Tế Thị Trấn Kiên Lương - Địa chỉ: TT. Kiên Lương, H. Kiên Lương, Kiên Giang</p>
-      </footer>
+     </footer>
+
+  <script>
+    // Lấy danh sách đăng ký từ localStorage
+    let registrations = JSON.parse(localStorage.getItem('registrations')) || [];
+
+    // Lấy phần tử tbody để hiển thị danh sách đăng ký
+    const registrationList = document.getElementById('registration-list');
+
+    // Hiển thị danh sách đăng ký
+    registrations.forEach(registration => {
+      const row = document.createElement('tr');
+      row.innerHTML = `
+        <td>${registration.name}</td>
+        <td>${registration.dob}</td>
+        <td>${registration.gender === 'male' ? 'Nam' : 'Nữ'}</td>
+        <td>${registration.vaccine}</td>
+        <td>${registration.appointment}</td>
+      `;
+      registrationList.appendChild(row);
+    });
+  </script>
 
 </body>
 </html>
