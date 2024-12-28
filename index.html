@@ -92,8 +92,45 @@
 
   <script>
     document.getElementById('registerForm').addEventListener('submit', function(event) {
-      // Prevent form from submitting normally
+      // Ngăn chặn form gửi đi
       event.preventDefault();
+
+      // Lấy thông tin từ form
+      const name = document.getElementById('name').value;
+      const dob = document.getElementById('dob').value;
+      const gender = document.getElementById('gender').value;
+      const address = document.getElementById('address').value;
+      const parentName = document.getElementById('parentName').value;
+      const phone = document.getElementById('phone').value;
+      const vaccine = document.getElementById('vaccine').value;
+      const appointment = document.getElementById('appointment').value;
+
+      // Kiểm tra tính hợp lệ của dữ liệu
+      if (!name || !phone || !dob || !appointment) {
+        alert('Vui lòng điền đầy đủ thông tin!');
+        return;
+      }
+
+      // Lưu thông tin đăng ký vào localStorage
+      const registrationData = {
+        name,
+        dob,
+        gender,
+        address,
+        parentName,
+        phone,
+        vaccine,
+        appointment
+      };
+
+      // Lấy danh sách đăng ký đã có trong localStorage hoặc tạo mới
+      let registrations = JSON.parse(localStorage.getItem('registrations')) || [];
+
+      // Thêm thông tin đăng ký vào danh sách
+      registrations.push(registrationData);
+
+      // Lưu lại danh sách vào localStorage
+      localStorage.setItem('registrations', JSON.stringify(registrations));
 
       // Thực hiện kiểm tra form hoặc gửi dữ liệu nếu cần
       const name = document.getElementById('name').value;
