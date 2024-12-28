@@ -3,42 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Đăng Ký Tiêm Chủng</title>
-    <link rel="stylesheet" href="styles.css"> <!-- Liên kết tới file CSS -->
+    <title>Đăng ký Tiêm Chủng</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header>
-        <h1>Đăng ký tiêm chủng</h1>
-    </header>
+    <h1>Đăng ký Ngày Giờ Tiêm Chủng</h1>
+    
+    <!-- Form đăng ký -->
+    <form id="registrationForm">
+        <label for="name">Họ và tên:</label>
+        <input type="text" id="name" required><br><br>
 
-    <main>
-        <div class="form-container">
-            <form id="registration-form">
-                <div class="form-group">
-                    <label for="name">Họ và tên</label>
-                    <input type="text" id="name" name="name" placeholder="Nhập họ và tên" required>
-                </div>
-                <div class="form-group">
-                    <label for="phone">Số điện thoại</label>
-                    <input type="tel" id="phone" name="phone" placeholder="Nhập số điện thoại" required>
-                </div>
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email" placeholder="Nhập email" required>
-                </div>
-                <div class="form-group">
-                    <label for="date">Ngày tiêm</label>
-                    <input type="date" id="date" name="date" required>
-                </div>
-                <button type="submit">Đăng ký</button>
-            </form>
-        </div>
-    </main>
+        <label for="dob">Ngày sinh:</label>
+        <input type="date" id="dob" required><br><br>
 
-    <footer>
-        <p>© 2024 Đăng ký tiêm chủng</p>
-    </footer>
+        <label for="phone">Số điện thoại:</label>
+        <input type="tel" id="phone" required><br><br>
 
-    <script src="script.js"></script> <!-- Liên kết tới file JavaScript -->
+        <label for="appointmentDate">Ngày giờ tiêm:</label>
+        <input type="datetime-local" id="appointmentDate" required><br><br>
+
+        <!-- Thêm lựa chọn vắc xin -->
+        <label for="vaccine">Lựa chọn vắc xin:</label>
+        <select id="vaccine" required>
+            <option value="">Chọn vắc xin</option>
+            <option value="OPV">Vắc xin A</option>
+            <option value="SỞI">Vắc xin B</option>
+            <option value="5 IN 1">Vắc xin C</option>
+            <option value=" IPV">Vắc xin D</option>
+        </select><br><br>
+
+        <!-- Thêm họ tên ba mẹ -->
+        <label for="parentName">Họ và tên ba mẹ:</label>
+        <input type="text" id="parentName" required><br><br>
+
+        <!-- Thêm cân nặng -->
+        <label for="weight">Cân nặng (kg):</label>
+        <input type="number" id="weight" required><br><br>
+
+        <!-- Thêm chiều cao -->
+        <label for="height">Chiều cao (cm):</label>
+        <input type="number" id="height" required><br><br>
+
+        <button type="submit">Đăng ký</button>
+    </form>
+
+    <h2>Danh Sách Đăng Ký</h2>
+    <!-- Bảng hiển thị danh sách đăng ký -->
+    <table id="registrationList">
+        <thead>
+            <tr>
+                <th>Họ và tên</th>
+                <th>Ngày sinh</th>
+                <th>Số điện thoại</th>
+                <th>Ngày giờ tiêm</th>
+                <th>Vắc xin</th>
+                <th>Họ và tên ba mẹ</th>
+                <th>Cân nặng</th>
+                <th>Chiều cao</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Dữ liệu sẽ được hiển thị ở đây -->
+        </tbody>
+    </table>
+
+    <script src="script.js"></script>
 </body>
 </html>
