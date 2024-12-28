@@ -8,7 +8,20 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-   <!-- Tiêu đề và giới thiệu -->
+
+  <!-- Thanh điều hướng -->
+  <header>
+    <nav>
+      <ul>
+        <li><a href="#">Trang Chủ</a></li>
+        <li><a href="#">Giới Thiệu</a></li>
+        <li><a href="#">Đăng Ký Tiêm Chủng</a></li>
+        <li><a href="#">Liên Hệ</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Tiêu đề và giới thiệu -->
   <section class="intro">
     <h1>Đăng Ký Tiêm Chủng Tại Trạm Y Tế Thị Trấn Kiên Lương</h1>
     <p>Vui lòng điền đầy đủ thông tin vào form bên dưới để đăng ký tiêm chủng cho trẻ của bạn.</p>
@@ -16,7 +29,7 @@
 
   <!-- Form đăng ký -->
   <section class="form-container">
-    <form action="#" method="POST">
+    <form id="registerForm" action="javascript:void(0);">
       <div class="form-group">
         <label for="name">Họ và tên trẻ:</label>
         <input type="text" id="name" name="name" required>
@@ -54,12 +67,12 @@
         <label for="vaccine">Vắc xin đăng ký tiêm:</label>
         <select id="vaccine" name="vaccine" required>
           <option value="dpt">DPT (Bạch hầu, ho gà, uốn ván)</option>
-          <option value="opv + 5in1">OPV + 5IN1</option>
-          <option value="mr">MR (Sởi, rubella)</option>
+          <option value="mr">MR (Sởi, quai bị, rubella)</option>
+          <option value="ipv">IPV </option>
           <option value="sởi">SỞI </option>
-          <option value="ipv">IPV (Polio)</option>
-          <option value="vnnb">VNNB (Viêm não nhật bản) (Polio)</option>
-          <option value="bcg">BCG (LAO)</option>
+          <option value="vnnb">Viêm não nhật bản</option>
+          <option value="bcg">BCG (Lao)</option>
+          <option value="opv + 5in1">OPV + 5in1</option>
         </select>
       </div>
 
@@ -74,8 +87,30 @@
 
   <!-- Thông tin liên hệ -->
   <footer>
-    <p>Trạm Y Tế Thị Trấn Kiên Lương - Địa chỉ: TT Kiên Lương,H.Kiên Lương, Kiên Giang</p>
-  </footer>
+    <p>Trạm Y Tế Thị Trấn Kiên Lương - Địa chỉ: TT. Kiên Lương,H. Kiên Lương, Kiên Giang</p>
+      </footer>
+
+  <script>
+    document.getElementById('registerForm').addEventListener('submit', function(event) {
+      // Prevent form from submitting normally
+      event.preventDefault();
+
+      // Thực hiện kiểm tra form hoặc gửi dữ liệu nếu cần
+      const name = document.getElementById('name').value;
+      const phone = document.getElementById('phone').value;
+
+      if (!name || !phone) {
+        alert('Vui lòng điền đầy đủ thông tin!');
+        return;
+      }
+
+      // Nếu tất cả thông tin hợp lệ, điều hướng tới trang danh sách đăng ký
+      alert('Đăng ký thành công!');
+      
+      // Chuyển hướng sang trang danh sách đăng ký
+      window.location.href = "danh-sach-dang-ky.html"; // Địa chỉ trang danh sách đăng ký
+    });
+  </script>
 
 </body>
 </html>
