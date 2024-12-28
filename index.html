@@ -1,102 +1,92 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Đăng ký Tiêm Chủng Lịch Vạn Niên</title>
-    <link rel="stylesheet" href="styles.css">
-    <!-- Thêm thư viện cho lịch vạn niên (Lịch Âm Dương) -->
-    <script src="https://cdn.jsdelivr.net/npm/vietnamese-lunar-calendar@0.0.3/dist/lunar-calendar.min.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Đăng Ký Tiêm Chủng | Trạm Y Tế Thị Trấn Kiên Lương</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Quicksand:wght@300;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Đăng ký Tiêm Chủng</h1>
 
-        <!-- Form đăng ký -->
-        <form id="registrationForm">
-            <div class="form-group">
-                <label for="name">Họ và tên</label>
-                <input type="text" id="name" placeholder="Nhập họ và tên" required>
-            </div>
+  <!-- Thanh điều hướng -->
+  <header>
+    <nav>
+      <ul>
+        <li><a href="#">Trang Chủ</a></li>
+        <li><a href="#">Giới Thiệu</a></li>
+        <li><a href="#">Đăng Ký Tiêm Chủng</a></li>
+        <li><a href="#">Liên Hệ</a></li>
+      </ul>
+    </nav>
+  </header>
 
-            <div class="form-group">
-                <label for="dob">Ngày sinh</label>
-                <input type="date" id="dob" required>
-            </div>
+  <!-- Tiêu đề và giới thiệu -->
+  <section class="intro">
+    <h1>Đăng Ký Tiêm Chủng Tại Trạm Y Tế Thị Trấn Kiên Lương</h1>
+    <p>Vui lòng điền đầy đủ thông tin vào form bên dưới để đăng ký tiêm chủng cho trẻ của bạn.</p>
+  </section>
 
-            <div class="form-group">
-                <label for="phone">Số điện thoại</label>
-                <input type="tel" id="phone" placeholder="Nhập số điện thoại" required>
-            </div>
+  <!-- Form đăng ký -->
+  <section class="form-container">
+    <form action="#" method="POST">
+      <div class="form-group">
+        <label for="name">Họ và tên trẻ:</label>
+        <input type="text" id="name" name="name" required>
+      </div>
 
-            <div class="form-group">
-                <label for="appointmentDate">Ngày giờ tiêm (Lịch Dương)</label>
-                <input type="datetime-local" id="appointmentDate" required>
-            </div>
+      <div class="form-group">
+        <label for="dob">Ngày, tháng, năm sinh:</label>
+        <input type="date" id="dob" name="dob" required>
+      </div>
 
-            <div class="form-group">
-                <label for="lunarDate">Ngày giờ tiêm (Lịch Âm)</label>
-                <input type="text" id="lunarDate" placeholder="Lịch Âm sẽ hiển thị ở đây" readonly>
-            </div>
+      <div class="form-group">
+        <label for="gender">Giới tính:</label>
+        <select id="gender" name="gender" required>
+          <option value="male">Nam</option>
+          <option value="female">Nữ</option>
+        </select>
+      </div>
 
-            <div class="form-group">
-                <label for="vaccine">Lựa chọn vắc xin</label>
-                <select id="vaccine" required>
-                    <option value="">Chọn vắc xin</option>
-                    <option value="Vắc xin A">Vắc xin A</option>
-                    <option value="Vắc xin B">Vắc xin B</option>
-                    <option value="Vắc xin C">Vắc xin C</option>
-                    <option value="Vắc xin D">Vắc xin D</option>
-                </select>
-            </div>
+      <div class="form-group">
+        <label for="address">Địa chỉ:</label>
+        <input type="text" id="address" name="address" required>
+      </div>
 
-            <div class="form-group">
-                <label for="parentName">Họ và tên ba mẹ</label>
-                <input type="text" id="parentName" placeholder="Nhập họ và tên ba mẹ" required>
-            </div>
+      <div class="form-group">
+        <label for="parentName">Họ và tên ba/mẹ:</label>
+        <input type="text" id="parentName" name="parentName" required>
+      </div>
 
-            <div class="form-group">
-                <label for="weight">Cân nặng (kg)</label>
-                <input type="number" id="weight" placeholder="Nhập cân nặng" required>
-            </div>
+      <div class="form-group">
+        <label for="phone">Số điện thoại:</label>
+        <input type="tel" id="phone" name="phone" pattern="[0-9]{10}" required>
+      </div>
 
-            <div class="form-group">
-                <label for="height">Chiều cao (cm)</label>
-                <input type="number" id="height" placeholder="Nhập chiều cao" required>
-            </div>
+      <div class="form-group">
+        <label for="vaccine">Vắc xin đăng ký tiêm:</label>
+        <select id="vaccine" name="vaccine" required>
+          <option value="dpt">DPT (Bạch hầu, ho gà, uốn ván)</option>
+          <option value="hepb">HEPB (Hepatitis B)</option>
+          <option value="mmr">MMR (Sởi, quai bị, rubella)</option>
+          <option value="ipv">IPV (Polio)</option>
+        </select>
+      </div>
 
-            <div class="form-group">
-                <label for="address">Địa chỉ</label>
-                <input type="text" id="address" placeholder="Nhập địa chỉ" required>
-            </div>
+      <div class="form-group">
+        <label for="appointment">Ngày, giờ tiêm:</label>
+        <input type="datetime-local" id="appointment" name="appointment" required>
+      </div>
 
-            <button type="submit">Đăng ký</button>
-        </form>
+      <button type="submit">Đăng Ký</button>
+    </form>
+  </section>
 
-        <!-- Bảng hiển thị danh sách đăng ký -->
-        <h2>Danh Sách Đăng Ký</h2>
-        <table id="registrationList">
-            <thead>
-                <tr>
-                    <th>Họ và tên</th>
-                    <th>Ngày sinh</th>
-                    <th>Số điện thoại</th>
-                    <th>Ngày giờ tiêm (Lịch Dương)</th>
-                    <th>Ngày giờ tiêm (Lịch Âm)</th>
-                    <th>Vắc xin</th>
-                    <th>Họ tên ba mẹ</th>
-                    <th>Cân nặng</th>
-                    <th>Chiều cao</th>
-                    <th>Địa chỉ</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Dữ liệu sẽ được hiển thị ở đây -->
-            </tbody>
-        </table>
-    </div>
+  <!-- Thông tin liên hệ -->
+  <footer>
+    <p>Trạm Y Tế Thị Trấn Kiên Lương - Địa chỉ: Xã Kiên Lương, Kiên Giang</p>
+    <p>Điện thoại: 0297 386 7788</p>
+  </footer>
 
-    <!-- Kết nối với JavaScript -->
-    <script src="script.js"></script>
 </body>
 </html>
