@@ -61,24 +61,23 @@
             <button type="submit">Đăng ký</button>
         </form>
 
-        <h2>Danh Sách Đăng Ký</h2>
-        <table id="registrationList">
-            <thead>
-                <tr>
-                    <th>Họ và tên</th>
-                    <th>Ngày sinh</th>
-                    <th>Số điện thoại</th>
-                    <th>Ngày giờ tiêm</th>
-                    <th>Vắc xin</th>
-                    <th>Họ và tên ba mẹ</th>
-                    <th>Cân nặng</th>
-                    <th>Chiều cao</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Dữ liệu sẽ được hiển thị ở đây -->
-            </tbody>
-        </table>
+        <!-- Bảng hiển thị lịch đăng ký -->
+        <h2>Lịch Tiêm Chủng</h2>
+        <div id="calendar">
+            <!-- Lịch tiêm chủng sẽ được hiển thị ở đây -->
+            <table id="calendarTable">
+                <thead>
+                    <tr>
+                        <th>Ngày giờ</th>
+                        <th>Vắc xin</th>
+                        <th>Họ tên ba mẹ</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Các lịch tiêm sẽ được thêm vào đây -->
+                </tbody>
+            </table>
+        </div>
     </div>
 
     <script src="script.js"></script>
